@@ -1,0 +1,112 @@
+<div class="heading">
+    <div class="content">
+        <div class="title">Dettagli del prodotto</div>
+    </div>
+    <mat-divider></mat-divider>
+</div>
+<div class="detail-container" *ngIf="response">
+    <mat-card>
+        <mat-card-content>
+            <mat-grid-list class="product-detail" [cols]="breakpoint" rowHeight="{{gridListRowHeight}}px" (window:resize)="onResize($event)">
+                <mat-grid-tile>
+                    <div class="product-image-container">
+                        <img class="product-image" [src]="response!.value[0].category!.img">
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-card class="product-action">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <h1>{{response!.value[0].name}}</h1>
+                                    <div class="product-toolbar" *ngIf="admin">
+                                        <button mat-mini-fab color="warn" aria-label="Edit" style="margin-right: 8px;" (click)="openEditDialog()">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-mini-fab color="primary" aria-label="Disable" (click)="openDisableDialog()">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                <h4>{{response!.value[0].introductoryPrice}}€</h4>
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <button [disabled]="operating" (click)="handleUsed()" style="width: 100%;" mat-stroked-button>{{userReview!.isUsed ? "Usufruito" : "Non Usufruito"}}</button>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button [disabled]="operating" (click)="handleWishlist()" style="width: 100%;" mat-flat-button color="accent">{{userReview!.inWishList ? "- Wishlist" : "+ Wishlist"}}</button>
+                        </mat-card-actions>
+                        <mat-card-footer style="  display: flex;
+                        justify-content: center;text-align: center; ">
+                            <span>{{response!.value[0].dateAdded.toLocaleDateString("it-IT",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</span>
+                        </mat-card-footer>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div *ngIf="response.value[0].additionalData != []">
+                <div *ngIf="response.value[0].additionalData.image">
+                    <h1>Immagini</h1>
+                    <div *ngFor="let item of response.value[0].additionalData.image | keyvalue">
+                        <a style="text-decoration: none;" [href]="item.value">{{item.key}}</a>
+                    </div>
+                </div>
+                <div *ngIf="response.value[0].additionalData['text']">
+                    <h1>Informazioni testuali</h1>
+                    <div *ngFor="let item of response.value[0].additionalData.text | keyvalue">
+                        <b>{{item.key}}</b>: <b>{{item.value}}</b>
+                    </div>
+                </div>
+                <div *ngIf="response.value[0].additionalData.number">
+                    <h1>Numeri</h1>
+                    <div *ngFor="let item of response.value[0].additionalData.number | keyvalue">
+                        <b>{{item.key}}</b>: <b>{{item.value}}</b>
+                    </div>
+                </div>
+                <div *ngIf="response.value[0].additionalData.link" >
+                    <h1>Collegamenti esterni</h1>
+                    <div *ngFor="let item of response.value[0].additionalData.link | keyvalue">
+                        <a style="text-decoration: none;" [href]="item.value">{{item.key}}</a>
+                    </div>
+                </div>
+            </div>
+            <mat-card>
+                <mat-card-header *ngIf="userReview">
+                    <form *ngIf="userReview.isUsed" class="comment-form" >
+                        <h1>Lascia una recensione</h1>
+                        <mat-form-field class="comment" appearance="outline">
+                            <input matInput placeholder="Titolo Rencesione" name="titleReview"
+                                [(ngModel)]="reviewTitle">
+                        </mat-form-field>
+                        <mat-form-field class="comment" appearance="outline">
+                            <textarea matInput placeholder="Leave a comment" name="comment"
+                                [(ngModel)]="review"></textarea>
+                        </mat-form-field>
+                        <mat-card-actions align="end">
+                            <button (click)="onReset()" *ngIf="userReview.review" mat-raised-button color="secondaty">Elimina</button>
+                            <button (click)="onSubmit()" [disabled]="(review.trim() === reviewStart.trim() && reviewTitle.trim() === reviewTitleStart.trim()) || review.trim() === '' || reviewTitle.trim() === ''" mat-raised-button color="primary">{{userReview.review ? "Modifica" : "Invia"}}</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list *ngIf="effectiveReviews!.length > 0">
+                        <div mat-subheader>Recensioni</div>
+                        <mat-list-item *ngFor="let review of effectiveReviews">
+                            <!-- <div style="border: 1px solid black;"> -->
+                                <mat-icon matListItemIcon>person</mat-icon>
+                                <div matListItemTitle>{{review.reviewTitle}}</div>
+                                <div matListItemLine>{{review.review}}</div>
+                                <div matListItemLine>{{review.lastModifiedDate.toLocaleDateString("it-IT",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</div>
+                                <div matListItemLine>{{review.user!.name}} {{review.user!.surname}}</div>
+                            <!-- </div> -->
+
+                        </mat-list-item>
+
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,44 @@
+.heading {
+    margin: 15px 30px 15px 30px;
+}
+
+.title {
+    margin-bottom: 10px;
+    color: var(--text-heading-dark, #27272e);
+    font: var(--headings-h-1, 700 36px/136.02% "Inter", sans-serif);
+    text-align: left;
+}
+
+.admin-container {
+    border-radius: 20px;
+    box-shadow: 0.063rem 0.063rem 1.25rem 0.063rem #8690a3;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+}
+
+mat-card {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px
+}
+
+.admin-paginator {
+    border-radius: 20px;
+    justify-content: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.admin-table{
+    min-height: 400px;
+}
+
+
+
+

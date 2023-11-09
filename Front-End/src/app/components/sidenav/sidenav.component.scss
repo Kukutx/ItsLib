@@ -1,0 +1,112 @@
+h1 {
+    padding: 0 1rem;
+}
+
+h2 {
+    padding: 1rem;
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background: #4a4e50;
+
+    .logo-container {
+        .logo {
+            background: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            font-size: 24px;
+            font-weight: 900;
+        }
+    }
+}
+
+mat-sidenav-container {
+    height: 100%;
+}
+
+// Sposta il contenuto verso il basso in modo che non venga nascosto dalla sidebar
+mat-sidenav {
+    background: #263238;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    border-radius: 0 15px 15px 0;
+    transition: width 0.5s ease;
+
+    @media screen and (max-width: 800px) {
+        padding-top: 3.5rem;
+    }
+
+    .entry {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        color: #fff;
+    }
+}
+
+.logo-desktop {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    width: 3rem;
+    min-width: 3rem;
+
+    button {
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+.logo-mobile {
+    display: flex;
+    align-items: center;
+    width: 3rem;
+    min-width: 3rem;
+
+    button {
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+.logo-text {
+    margin-left: 1.5rem;
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.menu-close {
+    color: #fff;
+    font-size: 24px;
+}
+
+.active {
+    background-color: #fff;
+
+    .menu-icon {
+        color: #263238;
+    }
+
+    .menu-text {
+        color: #263238;
+    }
+}
+
+// Sposta il contenuto verso il basso in modo che non venga nascosto dalla barra degli strumenti
+mat-sidenav-content {
+    // padding-top: 3.5rem;
+
+    @media screen and (max-width: 800px) {
+        padding-top: 4rem;
+    }
+}
+
+.expanded {
+    width: 250px;
+}

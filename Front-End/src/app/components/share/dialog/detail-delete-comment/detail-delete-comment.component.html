@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Delete Comment</h2>
+<mat-dialog-content>
+    <h5>Are You Sure?</h5>
+    <p>{{message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="onConfirmClick()" >confirm</button>
+    <button mat-raised-button mat-dialog-close>cancel</button>
+</mat-dialog-actions>

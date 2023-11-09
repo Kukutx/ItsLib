@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Edit Comment</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="comment-form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="comment" appearance="outline">
+            <input matInput placeholder="Titolo Rencesione" name="titleReview" [(ngModel)]="noteForm.value.titleReview">
+        </mat-form-field>
+        <mat-form-field class="comment" appearance="outline">
+            <textarea style="height: 150px;" matInput placeholder="Leave a comment" name="comment" [(ngModel)]="noteForm.value.comment"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

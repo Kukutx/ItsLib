@@ -1,0 +1,129 @@
+.heading {
+    margin: 15px 30px 15px 30px;
+}
+
+.title {
+    margin-bottom: 10px;
+    color: var(--text-heading-dark, #27272e);
+    font: var(--headings-h-1, 700 36px/136.02% "Inter", sans-serif);
+    text-align: left;
+}
+
+.product-container {
+    border-radius: 20px;
+    box-shadow: 0.063rem 0.063rem 1.25rem 0.063rem #8690a3;
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+
+    mat-card {
+        margin: 20px;
+        border-radius: 20px;
+    }
+
+    .profile-info{
+        width: 100%;
+    }
+}
+
+.profile-detail-card {
+    width: 20%;
+    align-items: center;
+
+    img {
+        border-radius: 100%;
+    }
+
+    p {
+        text-align: center;
+        vertical-align: top;
+        font-size: 28px;
+        font-family: Helvetica;
+        line-height: auto;
+        color: #000000;
+    }
+}
+
+.profile-form {
+    min-width: 150px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .profile-full-width {
+        width: 100%;
+        display: flex;
+    }
+}
+
+.mat-expansion-panel {
+    height: 230px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+}
+
+.mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.percentage {
+    background-color: red;
+    border-radius: 5px;
+    color: antiquewhite;
+    width: 25px;
+    padding: 2px;
+}
+
+mat-list {
+    /*
+    *scrollbar style
+    */
+
+    &::-webkit-scrollbar {
+        background-color: #fff;
+        width: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #babac0;
+        border-radius: 16px;
+        border: 4px solid #fff;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .product-container {
+        margin: 10px;
+        flex-direction: column;
+        mat-card {
+            margin: 10px;
+        }
+
+        .profile-info{
+            width: auto;
+        }
+    }
+
+    .profile-detail-card {
+        width: 95%;
+
+        img {
+            border-radius: 100%;
+            height: 100px;
+            width: 100px;
+        }
+    }
+
+    .mat-expansion-panel {
+        height: 200px;
+    }
+}

@@ -1,0 +1,33 @@
+<div class="login-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>Login</mat-card-title>
+                <mat-card-subtitle>Inserisci email e password del tuo account</mat-card-subtitle>
+            </mat-card-title-group>
+        </mat-card-header>
+        <form (submit)="handleLogin()" [formGroup]="loginForm">
+            <mat-card-content>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="pat@example.com" ng-control="email"
+                        [formControl]="loginForm.controls.email">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" ng-control="password"
+                        [formControl]="loginForm.controls.password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </mat-card-content>
+            <button mat-flat-button type="submit" color="primary"
+                [disabled]="!loginForm.valid || disable">Login</button>
+        </form>
+        <p style="color: red;" *ngIf="showError">{{ errorMessage }}</p>
+        <p>Non hai un account? <a [routerLink]="'/register'">Registrati</a></p>
+    </mat-card>
+</div>

@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>Creare il Prodotto</h1>
+<mat-dialog-content>
+    <form class="product-crea-form" [formGroup]="productForm" (ngSubmit)="submitForm()">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome Prodotto</mat-label>
+            <input matInput placeholder="Nome del Prodotto" name="nameProduct" formControlName="nameProduct">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>scegli una categoria</mat-label>
+            <mat-select formControlName="category">
+                <mat-option value="Libri">Libri</mat-option>
+                <mat-option value="Giocattoli">Giocattoli</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="prezzo" formControlName="price">
+        </mat-form-field>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Facoltativa
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-divider></mat-divider>
+
+                <form [formGroup]="productOptionalForm">
+                    <div style="display: flex; margin-top: 10px;" formArrayName="productOptionalList"
+                        *ngFor="let item of productOptionalsArray.controls; let i = index">
+                        <div [formGroupName]="i">
+
+                            <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                                <mat-label>tipo</mat-label>
+                                <mat-select formControlName="type">
+                                    <mat-option value="Image">Image</mat-option>
+                                    <mat-option value="Link">Link</mat-option>
+                                    <mat-option value="Number">Number</mat-option>
+                                    <mat-option value="Text">Text</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                                <mat-label>keyName</mat-label>
+                                <input matInput placeholder="Nome di key" formControlName="keyName">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" style="flex: 1;">
+                                <mat-label>Link</mat-label>
+                                <input matInput type="url" formControlName="valueName" required pattern='(http|https)://.*'>
+                            </mat-form-field>
+
+                            <ng-container *ngIf="i !== productOptionalsArray.controls.length - 1; else elseButton">
+                                <button mat-mini-fab color="primary" aria-label="delete" (click)="removeOptional(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </ng-container>
+
+                            <ng-template #elseButton>
+                                <button mat-mini-fab color="accent" aria-label="add" (click)="addNewOptional()">
+                                    <mat-icon>plus_one</mat-icon>
+                                </button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <button mat-raised-button color="primary" [disabled]="!productForm.valid">Crea</button>
+        <button mat-raised-button mat-dialog-close>close</button>
+    </form>
+</mat-dialog-content>

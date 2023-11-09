@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Edit il Prodotto</h1>
+<mat-dialog-content>
+    <form style="display: flex; flex-direction: column; gap: 10px; margin: 10px;" [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nome Prodotto</mat-label>
+            <input matInput placeholder="Nome del Prodotto" name="nameProduct" formControlName="nameProduct">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>scegli una categoria</mat-label>
+            <mat-select formControlName="category">
+                <mat-option value="option1">Libri</mat-option>
+                <mat-option value="option3">Giocattoli</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="prezzo" formControlName="price">
+        </mat-form-field>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Facoltativa
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-divider></mat-divider>
+
+                <div style="display: flex; margin-top: 10px;">
+                    <form [formGroup]="productOptionalForm">
+                        <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                            <mat-label>Image</mat-label>
+                            <input matInput placeholder="Nome di Imagine" name="nameImage" formControlName="nameImage">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" style="flex: 1;">
+                            <mat-label>Link Image</mat-label>
+                            <input matInput type="url" formControlName="imageUrl" required pattern="https://.*">
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <button mat-raised-button color="primary" [disabled]="!productForm.valid">Crea</button>
+        <button mat-raised-button mat-dialog-close>close</button>
+    </form>
+</mat-dialog-content>

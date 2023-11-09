@@ -1,0 +1,109 @@
+<div class="heading">
+  <div class="content">
+    <div class="title">Gestione Utenti</div>
+  </div>
+  <mat-divider></mat-divider>
+</div>
+<div class="admin-container">
+  <mat-card>
+    <mat-card-header>
+      <div style="flex: 1; display: flex;">
+        <button (click)="promoteSelected()" mat-raised-button color="primary" style="margin-right: 8px;">
+          Promuovere
+        </button>
+
+        <button (click)="demoteSelected()" mat-raised-button color="accent" style="margin-right: 8px;">
+          Retrocedere
+        </button>
+
+        <button (click)="disableSelected()" mat-raised-button color="warn">
+          Disabilitare
+        </button>
+        
+        <button (click)="reableSelected()" mat-raised-button color="warn">
+          Riabilitare
+        </button>
+        <div style="flex: 1"></div>
+        <div class="search-group">
+          <mat-form-field class="my-form-field" appearance="outline">
+            <mat-label>Cerca...</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Es. Libro" #input>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-table [dataSource]="dataSource" class="admin-table">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef style="border: none; max-width: 75px;">
+            <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" style="max-width: 75px;">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <!-- name Column -->
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Nome </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Cognome </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userRoles">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Ruoli </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> <div *ngFor="let e of element.userRoles"><button mat-button [style]="'background-color:'+ (e === 'Admin' ? 'red' : 'blue')">{{e}}</button></div></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userName">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Email </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fiscalCode">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> CF </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.fiscalCode}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="loyaltyCardCode">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Carta </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.loyaltyCardCode}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isDisabled">
+          <mat-header-cell mat-header-cell *matHeaderCellDef style="border: none;"> Disabilitato </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.isDisabled}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"
+          style="border: 1px solid #ddd; border-radius: 15px; margin-bottom: 5px;"></mat-row>
+      </mat-table>
+
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-paginator class="admin-paginator" [length]="count" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        showFirstLastButtons 
+        hidePageSize="true"
+        (page)="handlePageEvent($event)"
+        aria-label="Seleziona la pagina">
+      </mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+
+
+
+
+</div>

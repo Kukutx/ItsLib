@@ -1,0 +1,93 @@
+<div class="heading">
+    <div class="content">
+        <div class="title">{{title}}</div>
+    </div>
+    <mat-divider></mat-divider>
+</div>
+<div class="product-container">
+        <mat-card class="profile-detail-card ">
+            <mat-card-header>
+                <mat-card-title>Profile</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/Logo2.png" width="150px"
+                height="150px">
+            <mat-card-content>
+                <p>Khusan Akhmedov</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="profile-info">
+            <mat-card-header style="display: flex;">
+                <mat-card-title>
+                    Infomation
+                </mat-card-title>
+                <div style="flex: 1"></div>
+                <mat-card-actions align="end">
+                    <ng-container *ngIf="isEditing; else editBtn">
+                        <button mat-raised-button (click)="isEditing = false"
+                            style="margin-right: 10px;">Cancel</button>
+                        <button mat-raised-button color="accent" style="margin-right: 10px;"
+                            (click)="isEditing = false"> Save</button>
+                    </ng-container>
+                    <ng-template #editBtn>
+                        <button mat-raised-button (click)="isEditing = true"> Edit</button>
+                    </ng-template>
+                </mat-card-actions>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                <form class="profile-form">
+                    <table class="profile-full-width" cellspacing="0">
+                            <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                                <mat-label>First name</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" style="flex: 1;">
+                                <mat-label>Last name</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                    </table>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="pat@example.com">
+                        </mat-form-field>
+                    </p>
+                    <table class="profile-full-width" cellspacing="0">
+                            <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" style="flex: 1;">
+                                <mat-label> Code</mat-label>
+                                <input matInput placeholder="Ex. 94105">
+                            </mat-form-field>
+                    </table>
+                </form>
+                <mat-accordion>
+                    <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Codice Sconto
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <mat-list style="height: 130px;overflow: auto;">
+                            <mat-list-item *ngFor="let code of discountCodes">
+                                <mat-icon matListItemIcon>scoreboard</mat-icon>
+                                <div matListItemTitle>{{code.discountCode}}</div>
+                                <div matListItemMeta>
+                                    <p class="percentage">
+                                        {{code.percentage}}</p>
+                                </div>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+</div>

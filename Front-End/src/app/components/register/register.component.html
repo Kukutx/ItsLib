@@ -1,0 +1,62 @@
+<div class="register-container">
+    <mat-card>
+        <form [formGroup]="registerForm" (submit)="onSubmit()">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <mat-card-title>Registrati</mat-card-title>
+                    <mat-card-subtitle>Inserisci i tuoi dati per registrarti</mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput [formControl]="registerForm.controls.name" name="name"
+                        placeholder="Enter your name">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput [formControl]="registerForm.controls.surname" name="surname"
+                        placeholder="Enter your surname">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="registerForm.controls.email" name="email"
+                        placeholder="pat@example.com">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                </mat-form-field>
+                <div style="display: flex;">
+                    <mat-form-field appearance="outline" style="flex: 1;padding-right: 10px;">
+                        <mat-label>Data di nascita</mat-label>
+                        <input matInput [formControl]="registerForm.controls.dateofbirth" name="dataofbirth"
+                            type="dataofbirth" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="flex: 1;padding-left: 10px;">
+                        <mat-label>Codice Fiscale</mat-label>
+                        <input matInput formControlName="fiscalcode" name="fiscalcode" type="fiscalcode"
+                            placeholder="Enter your FiscalCode">
+                    </mat-form-field>
+                </div>
+                <mat-form-field appearance="outline" style="margin-bottom: 30px;">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]="registerForm.controls.password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="registerForm.value.password">La password deve avere lettere
+                        maiuscole, minuscole, numeri e caratteri speciali, ed essere lunga almeno 8
+                        caratteri</mat-error>
+                </mat-form-field>
+
+
+
+            </mat-card-content>
+            <button mat-flat-button type="submit" [disabled]="!registerForm.valid" color="primary">Registrati</button>
+        </form>
+        <p style="color: red;" *ngIf="showError">{{ errorMessage }}</p>
+        <p>Hai già un account? <a [routerLink]="'/login'">Accedi</a></p>
+    </mat-card>
+</div>
